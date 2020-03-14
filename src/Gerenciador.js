@@ -13,6 +13,7 @@ class Gerenciador{
         let menu = "\nBem-vindo ao Estacionamento!\n" +
                 `Vagas comportadas: ${this.estacionamento.vagasTotais}\n` +
                 `Vagas ocupadas: ${this.estacionamento.vagasOcupadas}\n` +
+                `Vagas disponiveis: ${this.estacionamento.getVagasDisponiveis()}`
                 "1 - Emitir um ticket\n" +
                 "2 - Vizualizar o valor a ser pago em um ticket\n" +
                 "3 - Efetuar pagamento de um ticket\n" +

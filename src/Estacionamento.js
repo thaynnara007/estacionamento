@@ -25,6 +25,10 @@ class Estacionamento{
         this.vagasTotais = novoLimite;
     }
 
+    getVagasDisponiveis(){
+        return (this.vagasTotais - this.vagasOcupadas);
+    }
+
     getLocacao(){
         return this.locacao;
     }
@@ -80,7 +84,7 @@ class Estacionamento{
 
         while (ticket != undefined){
             i += 1;
-            ticket = ticket[i];
+            ticket = this.locacao[i];
         }
 
         return i;
@@ -124,7 +128,7 @@ class Estacionamento{
     consultaValor (ticketId){
 
         let valor = -1;
-
+        
         if (ticketId >= 0 && this.vagaNaoVazia(ticketId)){
 
             let ticket = this.locacao[ticketId];
@@ -141,7 +145,10 @@ class Estacionamento{
 
         if (ticketId >= 0 && this.vagaNaoVazia(ticketId)){
 
-            novaLocacao = this.locacao.splice(ticketId, 1);
+            let novaLocacao = this.locacao.map((ticket) =>{
+                if (ticket!= undefined && ticket.getId() != ticketId) return ticket;
+                else return undefined;
+            })
             this.setLocacao(novaLocacao);
             this.vagasOcupadas -= 1;
             removido = true;
@@ -158,6 +165,7 @@ class Estacionamento{
 
             ticket = this.locacao[ticketId];
             if (!ticket.getPago()) ticket.setPago();
+            else ticket = undefined;
         }
 
         return ticket

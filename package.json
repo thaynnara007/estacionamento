@@ -4,12 +4,15 @@
   "description": "",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node App.js"
   },
   "author": "thaynnara",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
+    "chai-arrays": "^2.0.0",
+    "mocha": "^7.1.0",
     "readline-sync": "^1.4.10"
   }
 }
