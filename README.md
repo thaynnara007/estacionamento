@@ -2,7 +2,7 @@
 
 Este é um programa simples cujo o intuito é fazer o controle de um estacionamento.
 
---
+---
 
 ## Uso
 
@@ -23,6 +23,7 @@ $ npm install
 ```
 
 > O sistema tem setado como default o número máximo de 40 vagas, porém esse número pode ser mudado a partir da definição de uma variável de ambiente chamada VAGAS_TOTAIS.
+
 > Para executar o sistema
 ```shell
 $ npm start
