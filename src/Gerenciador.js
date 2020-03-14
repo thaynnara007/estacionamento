@@ -13,11 +13,12 @@ class Gerenciador{
         let menu = "\nBem-vindo ao Estacionamento!\n" +
                 `Vagas comportadas: ${this.estacionamento.vagasTotais}\n` +
                 `Vagas ocupadas: ${this.estacionamento.vagasOcupadas}\n` +
-                `Vagas disponiveis: ${this.estacionamento.getVagasDisponiveis()}`
+                `Vagas disponiveis: ${this.estacionamento.getVagasDisponiveis()}\n` +
                 "1 - Emitir um ticket\n" +
-                "2 - Vizualizar o valor a ser pago em um ticket\n" +
-                "3 - Efetuar pagamento de um ticket\n" +
-                "4 - Sair do estacionamento\n" +
+                "2 - Lista todos os tickets em uso\n" +
+                "3 - Vizualizar o valor a ser pago em um ticket\n" +
+                "4 - Efetuar pagamento de um ticket\n" +
+                "5 - Sair do estacionamento\n" +
                 "0 - Para sair do sistema"; 
         
         console.log(menu);
@@ -34,6 +35,13 @@ class Gerenciador{
             console.log(ticket);            
         }
         else if (escolha == "2"){
+
+            this.estacionamento.getLocacao().forEach((ticket) => {
+                if (ticket != undefined) console.log(ticket.toString() + "\n");
+            })
+        }
+
+        else if (escolha == "3"){
 
             let ticketId = rl.question("Informe o id do ticket: ")
             let valor = this.estacionamento.consultaValor(ticketId);
@@ -56,6 +64,7 @@ class Gerenciador{
             
             console.log(mensagem)
         }
+        else if (escolha == "0") console.log("saindo do sistema...")
         else console.log("Por favor, digite umas das opções disponíveis");
     }
     start(){
