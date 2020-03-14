@@ -44,6 +44,7 @@ class Ticket {
         let pagamento = this.pago ? "sim" : "nao"
 
         let descricao = `Horario de entrada: ${this.horaEntrada}\n` +
+                    `Veiculo: ${this.veiculo}\n` +
                     `Ticket numero: ${this.id}\n` +
                     `Pago: ${pagamento}`;
 
@@ -51,6 +52,6 @@ class Ticket {
     }
 }
 
-module.exports = {Ticket}
+module.exports = Ticket
 
 

@@ -2,7 +2,7 @@ const Ticket = require('./Ticket');
 
 class Estacionamento{
 
-    constructor(vagasTotais){
+    constructor (vagasTotais){
         this.vagasOcupadas = 0;
         this.vagasTotais = vagasTotais; 
         this.locacao = new Array();
@@ -86,6 +86,10 @@ class Estacionamento{
         return i;
     }
 
+    vagaNaoVazia(ticketId) {
+        return (this.locacao[ticketId] != undefined)
+    }
+
     emiteTicket(veiculo){
 
         let ticket = "";
@@ -117,21 +121,47 @@ class Estacionamento{
         return valor;
     }
 
-    consultarValor (ticketId){
+    consultaValor (ticketId){
 
-        let ticket = this.locacao[ticketId];
-        let hora = ticket.getIntervalo();
-        let valor = this.calculaValor(hora, ticket.getVeiculo());
+        let valor = -1;
+
+        if (ticketId >= 0 && this.vagaNaoVazia(ticketId)){
+
+            let ticket = this.locacao[ticketId];
+            let hora = ticket.getIntervalo();
+            valor = this.calculaValor(hora, ticket.getVeiculo());
+        }
 
         return valor;
     }
 
     removeTicket(ticketId){
 
-        novaLocacao = this.locacao.splice(ticketId, 1);
-        this.setLocacao(novaLocacao);
-        this.vagasOcupadas -= 1;
+        let removido = false;
+
+        if (ticketId >= 0 && this.vagaNaoVazia(ticketId)){
+
+            novaLocacao = this.locacao.splice(ticketId, 1);
+            this.setLocacao(novaLocacao);
+            this.vagasOcupadas -= 1;
+            removido = true;
+        }
+
+        return removido;
+    }
+
+    pagaTicket(ticketId){
+
+        let ticket;
+
+        if (ticketId >= 0 && this.vagaNaoVazia(ticketId)){
+
+            ticket = this.locacao[ticketId];
+            if (!ticket.getPago()) ticket.setPago();
+        }
+
+        return ticket
     }
 }
 
-module.exports = {Estacionamento}
+module.exports = Estacionamento
